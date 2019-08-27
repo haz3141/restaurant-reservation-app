@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const fs = require('fs');
 
 const app = express();
@@ -20,8 +21,15 @@ class Restaurant {
 	constructor() {
 		this.reservations = [];
 		this.waitlist = [];
-	}
+    }
+    
+    addTable(newTable) {
+        this.reservations.push(newTable);
+    }
 }
+
+// Initialize Restaurant
+const thePub = new Restaurant();
 
 // ROUTES
 // Home
@@ -38,8 +46,8 @@ app.get('/tables', function(req, res) {
 });
 // POST Table
 app.post('/api/tables', function(req, res) {
-    const newTable = req.body;
-    reservations.push(newTable);
+    const newRSVP = new Table(req.body);
+    thePub.addTable(newRSVP);
 });
 
 // GET Table
