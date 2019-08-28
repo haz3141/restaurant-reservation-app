@@ -6,66 +6,76 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 <body>
     <div class="container">
+            <div class="jumbotron text-center">
+                <h1>Hot Restaurant</h1>
+                <h2>Current Reservations and Waiting List</h2>
+            </div>
+
+        <div class = 'row'>
+            <div class = 'col-1'>
+            </div>
+            <div class = 'col-10'>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Name</label>
+                        <input id="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <small id="emailHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Phone Number</label>
+                        <input id="phone" type="text" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Email</label>
+                        <input id="email" type="text" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Unique Id</label>
+                        <input id="id" type="text" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class = 'col-1'>
+            </div>
+        </div>
+
         <div class="row">
-            <div class="col-1">
+            <div class = 'col-1'>
             </div>
-            <div class="col-10">
-                <div class="text-center" class="jumbotron jumbotron-fluid">
-                    <h1 class="display-4">Hot Restaurant</h1>
-                        <p class="lead">Make Your Reservation</p>
-                </div>
+            <div class = 'col-1'>
+                <a href="">API Table Link</a>
             </div>
-            <div class="col-1">
+            <div class = 'col-1'>
+                <p>|</p>
             </div>
-        </div>    
+            <div class = 'col-1'>
+                <a href="">API Wait List</a>
+            </div>
+            <div class = 'col-8'>
+            </div>
+        </div>
     </div>
+    <script>
+        $('#submit').on('click', function() {
+            event.preventDefault()
+            const newReservation = {
+                name: $('#name').val().trim(),
+                id: $('#id').val().trim(),
+                email: $('#email').val().trim(),
+                phone: $('#phone').val().trim()
+            }
 
-    <div class = 'row'>
-        <div class = 'col-1'>
-        </div>
-        <div class = 'col-10'>
-            <form>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Name</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <small id="emailHelp" class="form-text text-muted"></small>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Phone Number</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Email</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Unique Id</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-        <div class = 'col-1'>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class = 'col-1'>
-        </div>
-        <div class = 'col-1'>
-            <a href="">API Table Link</a>
-        </div>
-        <div class = 'col-1'>
-            <p>|</p>
-        </div>
-        <div class = 'col-1'>
-            <a href="">API Wait List</a>
-        </div>
-        <div class = 'col-8'>
-        </div>
-    </div>
+            $.post('/api/tables', newReservation)
+                .then(function(data) {
+                    console.log('reserve.html', data);
+                    alert("Congratulations, your table has been reserved!!!!!!")
+            })
+        })
+    </script>
 </body>
 </html>
