@@ -32,30 +32,29 @@ class Restaurant {
 const thePub = new Restaurant();
 
 // ROUTES
-// Home
 app.get('/', function(req, res) {
 	res.sendFile(path.join(__dirname, 'index.html'));
 });
-// Make Reservations
+
 app.get('/reserve', function(req, res) {
 	res.sendFile(path.join(__dirname, 'reserve.html'));
 });
-// View Reservations
+
 app.get('/tables', function(req, res) {
 	res.sendFile(path.join(__dirname, 'tables.html'));
 });
-// POST Table
+
 app.post('/api/tables', function(req, res) {
     const newRSVP = new Table(req.body);
     thePub.addTable(newRSVP);
 });
 
-// GET Table
+
 app.get('/api/tables', function(req, res) {
 	return res.json(reservations);
 });
 
-// LISTEN
+// Listen
 app.listen(PORT, function() {
-	console.log(`App listening on PORT ${PORT}`);
+	console.log(`App running at http://localhost:${PORT}`);
 });
